@@ -88,3 +88,9 @@
 
       - name: 4. create self-signed SSL cert
         command: openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}" -days 3650 -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.crt -extensions v3_ca creates=/etc/apache2/ssl/server.crt
+        
+        
+      - name: Automated Test to check whether web server is up or not
+        wait_for:
+           port:8000
+           delay:10
